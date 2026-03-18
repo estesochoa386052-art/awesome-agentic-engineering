@@ -8,7 +8,7 @@ A curated collection of agent harnesses, frameworks, case studies, and resources
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-[Website](https://Parvej2017.github.io/awesome-agentic-engineering/) · [Contributing](CONTRIBUTING.md) · [Submit Resource](https://github.com/Parvej2017/awesome-agentic-engineering/issues/new)
+[Website](https://parvejhosen257.github.io/awesome-agentic-engineering/) · [Contributing](CONTRIBUTING.md) · [Submit Resource](https://github.com/parvejhosen257/awesome-agentic-engineering/issues/new)
 
 </div>
 
