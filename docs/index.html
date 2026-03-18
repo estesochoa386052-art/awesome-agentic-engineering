@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awesome Agentic Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a08;
+    --surface: #111110;
+    --surface2: #1a1a18;
+    --border: #2a2a26;
+    --accent: #e8ff5a;
+    --accent2: #ff6b35;
+    --text: #e8e6e0;
+    --text-muted: #7a7870;
+    --text-dim: #4a4845;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,255,90,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,255,90,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 48px 60px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px;
+    left: -100px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(232,255,90,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    bottom: -300px;
+    right: -200px;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(255,107,53,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .badge::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(52px, 8vw, 110px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    max-width: 560px;
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.45s;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #0a0a08;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover::after { opacity: 1; }
+  .btn-primary:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--accent2); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--border);
+  }
+
+  .stats-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-item {
+    padding: 24px 48px;
+    border-right: 1px solid var(--border);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .stat-item:nth-child(1) { animation-delay: 0.5s; }
+  .stat-item:nth-child(2) { animation-delay: 0.6s; }
+  .stat-item:nth-child(3) { animation-delay: 0.7s; }
+  .stat-item:nth-child(4) { animation-delay: 0.8s; border-right: none; }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 28px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: var(--mono);
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    background: rgba(10,10,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    padding: 16px 24px;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  nav a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 16px 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  nav a:hover { color: var(--accent); background: rgba(232,255,90,0.04); }
+
+  .nav-github {
+    margin-left: auto;
+    border-right: none !important;
+    border-left: 1px solid var(--border) !important;
+  }
+
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 64px 48px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  .explainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .explainer-text {
+    padding: 48px;
+    border-right: 1px solid var(--border);
+  }
+
+  .explainer-text p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .explainer-text p:last-child { margin-bottom: 0; }
+
+  .explainer-text strong { color: var(--text); font-weight: 500; }
+
+  .explainer-diagram {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .diagram-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .layer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .layer:hover { border-color: var(--accent); background: rgba(232,255,90,0.03); }
+
+  .layer-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .layer-name {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .layer-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+  }
+
+  .layer-arrow {
+    position: absolute;
+    left: 50%;
+    bottom: -13px;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: var(--text-dim);
+    z-index: 1;
+  }
+
+  .companies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .company-card {
+    padding: 40px 36px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+
+  .company-card:hover { background: var(--surface); }
+
+  .company-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--card-accent, var(--border));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .company-card:hover::before { transform: scaleX(1); }
+
+  .company-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .company-name {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+
+  .company-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .company-system {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--card-accent, var(--text-muted));
+    margin-bottom: 12px;
+  }
+
+  .company-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .company-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .metric {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+
+  .metric-val {
+    color: var(--card-accent, var(--accent));
+    font-weight: 500;
+    min-width: 60px;
+  }
+
+  .metric-label { color: var(--text-dim); }
+
+  .company-links {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .company-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .company-links a::before { content: '\2192'; color: var(--card-accent, var(--accent)); }
+  .company-links a:hover { color: var(--text); }
+
+  .resources-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .resources-nav {
+    border-right: 1px solid var(--border);
+    padding: 32px 0;
+    position: sticky;
+    top: 49px;
+    height: fit-content;
+  }
+
+  .res-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .res-nav-item.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(232,255,90,0.04);
+  }
+
+  .res-nav-item:hover:not(.active) { color: var(--text); background: var(--surface); }
+
+  .res-nav-count {
+    margin-left: auto;
+    background: var(--surface2);
+    padding: 2px 7px;
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  .resources-content { padding: 32px 48px; }
+
+  .resource-category { display: none; }
+  .resource-category.active { display: block; }
+
+  .resource-category h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .resource-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 24px;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid transparent;
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .resource-item:hover {
+    border-color: var(--border);
+    background: var(--surface2);
+  }
+
+  .resource-item:hover .res-arrow { opacity: 1; transform: translate(0,0); }
+
+  .res-title {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .res-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .res-tag {
+    background: var(--surface2);
+    padding: 2px 8px;
+    font-size: 10px;
+    color: var(--accent);
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(232,255,90,0.2);
+    white-space: nowrap;
+  }
+
+  .res-arrow {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 14px;
+    opacity: 0;
+    transform: translate(-4px, 0);
+    transition: all 0.2s;
+    padding-top: 2px;
+  }
+
+  .frameworks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .framework-card {
+    padding: 40px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .framework-card:nth-child(even) { border-right: none; }
+
+  .fw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .fw-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-style: italic;
+    color: var(--text);
+  }
+
+  .fw-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 3px 10px;
+    border: 1px solid;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .fw-badge.oss { color: #4ade80; border-color: rgba(74,222,128,0.3); }
+  .fw-badge.internal { color: #fb923c; border-color: rgba(251,146,60,0.3); }
+  .fw-badge.product { color: #60a5fa; border-color: rgba(96,165,250,0.3); }
+
+  .fw-org {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .fw-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .fw-features {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .fw-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .fw-feature::before { content: '\00B7'; color: var(--accent); font-size: 16px; line-height: 1; }
+
+  .fw-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+
+  .fw-link:hover { gap: 10px; }
+
+  .patterns-section { padding: 48px; border-bottom: 1px solid var(--border); }
+
+  .patterns-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .pattern-card {
+    padding: 28px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .pattern-card:hover { border-color: rgba(232,255,90,0.3); }
+
+  .pattern-num {
+    font-family: var(--mono);
+    font-size: 48px;
+    color: var(--text-dim);
+    line-height: 1;
+    margin-bottom: 16px;
+    opacity: 0.3;
+  }
+
+  .pattern-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .pattern-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .pattern-example {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    padding: 10px 14px;
+    background: var(--bg);
+    border-left: 2px solid var(--accent);
+    letter-spacing: 0.03em;
+  }
+
+  .contribute-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contribute-left {
+    padding: 64px 48px;
+    border-right: 1px solid var(--border);
+  }
+
+  .contribute-left h2 {
+    font-family: var(--serif);
+    font-size: 42px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+
+  .contribute-left h2 em { font-style: italic; color: var(--accent); }
+
+  .contribute-left p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .contribute-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(232,255,90,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .step-content p {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .contribute-right {
+    padding: 64px 48px;
+    background: var(--surface);
+  }
+
+  .contribute-right h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .template-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    white-space: pre-wrap;
+    margin-bottom: 24px;
+    border-left: 2px solid var(--accent);
+  }
+
+  .template-box .comment { color: var(--text-dim); }
+  .template-box .key { color: var(--accent); }
+  .template-box .val { color: #60a5fa; }
+
+  footer {
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-left {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-right {
+    display: flex;
+    gap: 32px;
+  }
+
+  .footer-right a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .footer-right a:hover { color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+  @media (max-width: 900px) {
+    .hero { padding: 80px 24px 200px; }
+    .hero h1 { font-size: clamp(42px, 10vw, 80px); }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-item { padding: 20px 24px; }
+    .explainer, .contribute-section { grid-template-columns: 1fr; }
+    .explainer-text, .contribute-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .section-header { padding: 48px 24px 24px; }
+    .companies-grid { grid-template-columns: 1fr; }
+    .company-card { border-right: none; }
+    .resources-layout { grid-template-columns: 1fr; }
+    .resources-nav { position: static; display: flex; overflow-x: auto; padding: 16px 0; border-right: none; border-bottom: 1px solid var(--border); }
+    .res-nav-item { border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+    .res-nav-item.active { border-bottom-color: var(--accent); border-left: none; background: none; }
+    .resources-content { padding: 24px; }
+    .frameworks-grid { grid-template-columns: 1fr; }
+    .framework-card { border-right: none; }
+    .patterns-grid { grid-template-columns: 1fr; }
+    .patterns-section { padding: 24px; }
+    .contribute-right, .contribute-left { padding: 40px 24px; }
+    footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .explainer-text, .explainer-diagram { padding: 32px 24px; }
+    nav { padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">&#x27E8; agentic.eng &#x27E9;</div>
+  <a href="#companies">Companies</a>
+  <a href="#resources">Resources</a>
+  <a href="#frameworks">Frameworks</a>
+  <a href="#patterns">Patterns</a>
+  <a href="#contribute">Contribute</a>
+  <a href="https://github.com/Parvej2017/awesome-agentic-engineering" class="nav-github" target="_blank">&#9733; GitHub</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="badge">awesome-list &middot; curated &middot; open source</div>
+
+  <h1>Awesome<br><em>Agentic</em><br>Engineering</h1>
+
+  <p class="hero-desc">
+    A curated collection of agent harnesses, engineering blogs, frameworks, and case studies from companies shipping production-grade agentic coding systems. The model is a commodity &mdash; the harness is the moat.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://github.com/Parvej2017/awesome-agentic-engineering" class="btn-primary" target="_blank">
+      &#9733; Star on GitHub
+    </a>
+    <a href="#resources" class="btn-ghost">Browse Resources &rarr;</a>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num">9+</span>
+      <span class="stat-label">Companies</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">40+</span>
+      <span class="stat-label">Resources</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">12+</span>
+      <span class="stat-label">Frameworks</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">6</span>
+      <span class="stat-label">Core Patterns</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="section-header">
+    <span class="section-num">00</span>
+    <h2 class="section-title">What is <em>harness engineering?</em></h2>
+  </div>
+  <div class="explainer">
+    <div class="explainer-text">
+      <p>
+        <strong>Harness engineering</strong> is the practice of building the constraints, tools, documentation, and feedback loops that make AI coding agents actually work in production. The term was popularized by OpenAI's February 2026 post, but the concept exists across every major engineering organization deploying agents at scale.
+      </p>
+      <p>
+        The key insight: <strong>the bottleneck is never the model</strong>. A GPT-4-class model with a well-engineered harness consistently outperforms a frontier model thrown at a raw codebase. Stripe put it bluntly: &ldquo;The real magic is the infrastructure. The AI agent itself is almost a commodity.&rdquo;
+      </p>
+      <p>
+        A harness encompasses: <strong>context engineering</strong> (what the agent knows), <strong>architectural constraints</strong> (what the agent can and cannot do), <strong>execution environments</strong> (isolated devboxes, VMs), <strong>feedback loops</strong> (linting, CI, review), and <strong>tooling</strong> (curated MCP servers, APIs, file access).
+      </p>
+    </div>
+    <div class="explainer-diagram">
+      <div class="diagram-label">The harness stack</div>
+
+      <div class="layer" style="margin-bottom: 2px;">
+        <div class="layer-dot" style="background: #e8ff5a;"></div>
+        <span class="layer-name">Human Oversight</span>
+        <span class="layer-desc">Architect &middot; Reviewer</span>
+        <div class="layer-arrow">&darr;</div>
+      </div>
+      <div class="layer" style="margin-bottom: 2px;">
+        <div class="layer-dot" style="background: #60a5fa;"></div>
+        <span class="layer-name">Context Layer</span>
+        <span class="layer-desc">AGENTS.md &middot; Docs &middot; Rules</span>
+        <div class="layer-arrow">&darr;</div>
+      </div>
+      <div class="layer" style="margin-bottom: 2px;">
+        <div class="layer-dot" style="background: #a78bfa;"></div>
+        <span class="layer-name">Orchestration</span>
+        <span class="layer-desc">Agent manager &middot; Blueprint nodes</span>
+        <div class="layer-arrow">&darr;</div>
+      </div>
+      <div class="layer" style="margin-bottom: 2px;">
+        <div class="layer-dot" style="background: #fb923c;"></div>
+        <span class="layer-name">AI Agent</span>
+        <span class="layer-desc">Codex &middot; Claude &middot; Gemini</span>
+        <div class="layer-arrow">&darr;</div>
+      </div>
+      <div class="layer" style="margin-bottom: 2px;">
+        <div class="layer-dot" style="background: #4ade80;"></div>
+        <span class="layer-name">Execution Environment</span>
+        <span class="layer-desc">Isolated devbox &middot; VM &middot; Container</span>
+        <div class="layer-arrow">&darr;</div>
+      </div>
+      <div class="layer">
+        <div class="layer-dot" style="background: #f472b6;"></div>
+        <span class="layer-name">Feedback Loops</span>
+        <span class="layer-desc">Lint &middot; CI &middot; Review &middot; Tests</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="companies">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Company <em>deployments</em></h2>
+  </div>
+  <div class="companies-grid">
+
+    <div class="company-card" style="--card-accent: #e8ff5a;">
+      <div class="company-header">
+        <span class="company-name">OpenAI</span>
+        <span class="company-tag">Harness Pioneer</span>
+      </div>
+      <div class="company-system">Codex + AGENTS.md</div>
+      <div class="company-desc">The team that defined &ldquo;harness engineering.&rdquo; Built 1M+ lines of code over 5 months using zero manually-written code, with 88 AGENTS.md files and 1,500+ PRs.</div>
+      <div class="company-metrics">
+        <div class="metric"><span class="metric-val">95%</span><span class="metric-label">engineers use Codex weekly</span></div>
+        <div class="metric"><span class="metric-val">+70%</span><span class="metric-label">more PRs by adopters</span></div>
+        <div class="metric"><span class="metric-val">2&ndash;3 min</span><span class="metric-label">avg PR review time</span></div>
+      </div>
+      <div class="company-links">
+        <a href="https://openai.com/index/harness-engineering/" target="_blank">Harness Engineering post</a>
+        <a href="https://newsletter.pragmaticengineer.com/p/how-codex-is-built" target="_blank">How Codex is built (Pragmatic Engineer)</a>
+      </div>
+    </div>
+
+    <div class="company-card" style="--card-accent: #ff6b35;">
+      <div class="company-header">
+        <span class="company-name">Stripe</span>
+        <span class="company-tag">Minions Architecture</span>
+      </div>
+      <div class="company-system">Minions + Blueprint</div>
+      <div class="company-desc">Unattended fire-and-forget agents running in isolated devboxes, powered by a 500-tool MCP server called Toolshed. Blueprint architecture alternates deterministic and agentic nodes.</div>
+      <div class="company-metrics">
+        <div class="metric"><span class="metric-val">1,300+</span><span class="metric-label">PRs merged per week</span></div>
+        <div class="metric"><span class="metric-val">0</span><span class="metric-label">human-written code per PR</span></div>
+        <div class="metric"><span class="metric-val">10s</span><span class="metric-label">devbox spin-up time</span></div>
+      </div>
+      <div class="company-links">
+        <a href="https://blog.bytebytego.com/p/how-stripes-minions-ship-1300-prs" target="_blank">How Stripe's Minions ship 1,300 PRs/wk</a>
+        <a href="https://www.engineering.fyi/article/minions-stripe-s-one-shot-end-to-end-coding-agents" target="_blank">Minions: one-shot end-to-end agents (Stripe Eng)</a>
+      </div>
+    </div>
+
+    <div class="company-card" style="--card-accent: #60a5fa;">
+      <div class="company-header">
+        <span class="company-name">Anthropic</span>
+        <span class="company-tag">Self-hosting AI</span>
+      </div>
+      <div class="company-system">Claude Code</div>
+      <div class="company-desc">Claude Code built itself &mdash; ~90% of its codebase is AI-generated. Anthropic published the definitive guide to harnesses for long-running agents with a two-agent initializer+coder architecture.</div>
+      <div class="company-metrics">
+        <div class="metric"><span class="metric-val">80%+</span><span class="metric-label">engineers use it daily</span></div>
+        <div class="metric"><span class="metric-val">+67%</span><span class="metric-label">PR throughput increase</span></div>
+        <div class="metric"><span class="metric-val">+50%</span><span class="metric-label">self-reported productivity</span></div>
+      </div>
+      <div class="company-links">
+        <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank">Effective Harnesses for Long-Running Agents</a>
+        <a href="https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic" target="_blank">How AI is transforming work at Anthropic</a>
+      </div>
+    </div>
+
+    <div class="company-card" style="--card-accent: #a78bfa;">
+      <div class="company-header">
+        <span class="company-name">Uber</span>
+        <span class="company-tag">Multi-tool Platform</span>
+      </div>
+      <div class="company-system">MCP Gateway + AIFX</div>
+      <div class="company-desc">Four-layer agentic platform across 5,000 engineers and 6 monorepos. Named tools: uReview (code review), AutoCover (tests), Shepherd (migrations), Validator, Code Inbox.</div>
+      <div class="company-metrics">
+        <div class="metric"><span class="metric-val">1,800</span><span class="metric-label">agent code changes/week</span></div>
+        <div class="metric"><span class="metric-val">95%</span><span class="metric-label">engineers use AI monthly</span></div>
+        <div class="metric"><span class="metric-val">21K+</span><span class="metric-label">dev hours saved</span></div>
+      </div>
+      <div class="company-links">
+        <a href="https://www.uber.com/blog/ureview/" target="_blank">uReview: GenAI Code Review at Uber</a>
+        <a href="https://newsletter.pragmaticengineer.com/p/how-uber-uses-ai-for-development" target="_blank">How Uber uses AI (Pragmatic Engineer)</a>
+      </div>
+    </div>
+
+    <div class="company-card" style="--card-accent: #4ade80;">
+      <div class="company-header">
+        <span class="company-name">Google / DeepMind</span>
+        <span class="company-tag">Research + Production</span>
+      </div>
+      <div class="company-system">DIDACT + AlphaEvolve</div>
+      <div class="company-desc">DIDACT trains on the full development process. AlphaEvolve is an evolutionary coding agent that recovered 0.7% of Google's worldwide compute resources through Borg scheduling improvements.</div>
+      <div class="company-metrics">
+        <div class="metric"><span class="metric-val">30%+</span><span class="metric-label">new code is AI-generated</span></div>
+        <div class="metric"><span class="metric-val">37%</span><span class="metric-label">code completion acceptance rate</span></div>
+        <div class="metric"><span class="metric-val">140K+</span><span class="metric-label">Jules beta code improvements</span></div>
+      </div>
+      <div class="company-links">
+        <a href="https://research.google/blog/ai-in-software-engineering-at-google-progress-and-the-path-ahead/" target="_blank">AI in software engineering at Google</a>
+        <a href="https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/" target="_blank">AlphaEvolve: Gemini-powered coding agent</a>
+      </div>
+    </div>
+
+    <div class="company-card" style="--card-accent: #fb923c;">
+      <div class="company-header">
+        <span class="company-name">Meta</span>
+        <span class="company-tag">Autonomous ML Agents</span>
+      </div>
+      <div class="company-system">REA + JiTTests</div>
+      <div class="company-desc">Ranking Engineer Agent drives end-to-end ML lifecycle for ads. JiTTests generate disposable tests per code change &mdash; zero maintenance cost, only surface when a bug is caught.</div>
+      <div class="company-metrics">
+        <div class="metric"><span class="metric-val">2x</span><span class="metric-label">model accuracy via REA</span></div>
+        <div class="metric"><span class="metric-val">5x</span><span class="metric-label">engineering productivity</span></div>
+        <div class="metric"><span class="metric-val">74.6%</span><span class="metric-label">SWE-Bench via Confucius</span></div>
+      </div>
+      <div class="company-links">
+        <a href="https://engineering.fb.com/2026/03/17/developer-tools/ranking-engineer-agent-rea-autonomous-ai-system-accelerating-meta-ads-ranking-innovation/" target="_blank">REA: Autonomous AI for Ads Ranking (Meta Eng)</a>
+        <a href="https://engineering.fb.com/2026/02/11/developer-tools/the-death-of-traditional-testing-agentic-development-jit-testing-revival/" target="_blank">JiTTests: The Death of Traditional Testing</a>
+      </div>
+    </div>
+
+    <div class="company-card" style="--card-accent: #f472b6;">
+      <div class="company-header">
+        <span class="company-name">Shopify</span>
+        <span class="company-tag">Mandate + Framework</span>
+      </div>
+      <div class="company-system">Roast Framework</div>
+      <div class="company-desc">CEO mandated AI as a baseline expectation. Open-sourced Roast: a Ruby-based framework for structured AI workflows mixing deterministic and agentic nodes with YAML+Markdown config.</div>
+      <div class="company-metrics">
+        <div class="metric"><span class="metric-val">100%</span><span class="metric-label">employees have AI tool access</span></div>
+        <div class="metric"><span class="metric-val">+20&ndash;40%</span><span class="metric-label">revenue growth while headcount &darr;</span></div>
+        <div class="metric"><span class="metric-val">Open</span><span class="metric-label">Roast framework (Ruby)</span></div>
+      </div>
+      <div class="company-links">
+        <a href="https://shopify.engineering/introducing-roast" target="_blank">Introducing Roast: Structured AI Workflows</a>
+        <a href="https://newsletter.pragmaticengineer.com/p/how-ai-is-changing-software-engineering" target="_blank">How AI is changing SE at Shopify</a>
+      </div>
+    </div>
+
+    <div class="company-card" style="--card-accent: #38bdf8;">
+      <div class="company-header">
+        <span class="company-name">Amazon / AWS</span>
+        <span class="company-tag">Scale + Caution</span>
+      </div>
+      <div class="company-system">Q Developer + Kiro</div>
+      <div class="company-desc">Upgraded 30,000 Java apps saving $260M in efficiencies. Kiro is a spec-driven agent IDE. Also published the definitive warning: AI assistants will overwhelm your delivery pipeline.</div>
+      <div class="company-metrics">
+        <div class="metric"><span class="metric-val">30K</span><span class="metric-label">Java apps auto-upgraded</span></div>
+        <div class="metric"><span class="metric-val">4,500</span><span class="metric-label">developer-years saved</span></div>
+        <div class="metric"><span class="metric-val">79%</span><span class="metric-label">AI code shipped unchanged</span></div>
+      </div>
+      <div class="company-links">
+        <a href="https://aws.amazon.com/blogs/enterprise-strategy/your-ai-coding-assistants-will-overwhelm-your-delivery-pipeline-heres-how-to-prepare/" target="_blank">AI Assistants Will Overwhelm Your Pipeline (AWS)</a>
+        <a href="https://aws.amazon.com/blogs/enterprise-strategy/measuring-the-impact-of-ai-assistants-on-software-development/" target="_blank">Measuring Impact of AI Assistants (AWS)</a>
+      </div>
+    </div>
+
+    <div class="company-card" style="--card-accent: #e879f9;">
+      <div class="company-header">
+        <span class="company-name">LinkedIn</span>
+        <span class="company-tag">MCP Platform</span>
+      </div>
+      <div class="company-system">Foreground + Background Agents</div>
+      <div class="company-desc">MCP-first architecture connecting agents to code search, static analysis, documentation, observability, and semantic indexes. Engineers push to production in 17 minutes.</div>
+      <div class="company-metrics">
+        <div class="metric"><span class="metric-val">17 min</span><span class="metric-label">code to production</span></div>
+        <div class="metric"><span class="metric-val">MCP</span><span class="metric-label">unified agent protocol</span></div>
+        <div class="metric"><span class="metric-val">+13%</span><span class="metric-label">faster promotion for soft-skill eng</span></div>
+      </div>
+      <div class="company-links">
+        <a href="https://www.infoq.com/podcasts/platform-engineering-scaling-agents/" target="_blank">Platform Engineering for AI: MCP at LinkedIn (InfoQ)</a>
+        <a href="https://linearb.io/blog/ai-transformation-software-development-linkedin" target="_blank">AI Transformation at LinkedIn (LinearB)</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="resources">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Curated <em>resources</em></h2>
+  </div>
+  <div class="resources-layout">
+    <div class="resources-nav">
+      <div class="res-nav-item active" onclick="showCategory('blogs')">Engineering Blogs <span class="res-nav-count">12</span></div>
+      <div class="res-nav-item" onclick="showCategory('papers')">Papers &amp; Research <span class="res-nav-count">6</span></div>
+      <div class="res-nav-item" onclick="showCategory('talks')">Talks &amp; Podcasts <span class="res-nav-count">5</span></div>
+      <div class="res-nav-item" onclick="showCategory('tools')">Tools &amp; Repos <span class="res-nav-count">8</span></div>
+      <div class="res-nav-item" onclick="showCategory('guides')">Guides &amp; Tutorials <span class="res-nav-count">6</span></div>
+    </div>
+
+    <div class="resources-content">
+
+      <div class="resource-category active" id="cat-blogs">
+        <h3>Engineering Blogs</h3>
+        <div class="resource-list">
+
+          <a class="resource-item" href="https://openai.com/index/harness-engineering/" target="_blank">
+            <div>
+              <div class="res-title">Harness Engineering: Leveraging Codex in an Agent-First World</div>
+              <div class="res-meta">
+                <span>OpenAI</span><span>Feb 2026</span>
+                <span class="res-tag">Foundation</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank">
+            <div>
+              <div class="res-title">Effective Harnesses for Long-Running Agents</div>
+              <div class="res-meta">
+                <span>Anthropic</span><span>Nov 2025</span>
+                <span class="res-tag">Architecture</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.anthropic.com/engineering/building-c-compiler" target="_blank">
+            <div>
+              <div class="res-title">Building a C Compiler with a Team of Parallel Claudes</div>
+              <div class="res-meta">
+                <span>Anthropic</span><span>2026</span>
+                <span class="res-tag">Multi-agent</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.engineering.fyi/article/minions-stripe-s-one-shot-end-to-end-coding-agents" target="_blank">
+            <div>
+              <div class="res-title">Minions: Stripe's One-Shot, End-to-End Coding Agents</div>
+              <div class="res-meta">
+                <span>Stripe Engineering</span><span>Feb 2026</span>
+                <span class="res-tag">Production</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://shopify.engineering/introducing-roast" target="_blank">
+            <div>
+              <div class="res-title">Introducing Roast: Structured AI Workflows Made Easy</div>
+              <div class="res-meta">
+                <span>Shopify Engineering</span><span>2025</span>
+                <span class="res-tag">Framework</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.uber.com/blog/ureview/" target="_blank">
+            <div>
+              <div class="res-title">uReview: Scalable, Trustworthy GenAI for Code Review at Uber</div>
+              <div class="res-meta">
+                <span>Uber Engineering</span><span>2025</span>
+                <span class="res-tag">Code Review</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://engineering.fb.com/2026/03/17/developer-tools/ranking-engineer-agent-rea-autonomous-ai-system-accelerating-meta-ads-ranking-innovation/" target="_blank">
+            <div>
+              <div class="res-title">REA: The Autonomous AI Agent Accelerating Meta's Ads Ranking Innovation</div>
+              <div class="res-meta">
+                <span>Meta Engineering</span><span>Mar 2026</span>
+                <span class="res-tag">Autonomous Agent</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://engineering.fb.com/2026/02/11/developer-tools/the-death-of-traditional-testing-agentic-development-jit-testing-revival/" target="_blank">
+            <div>
+              <div class="res-title">The Death of Traditional Testing: Agentic Development and JiTTesting</div>
+              <div class="res-meta">
+                <span>Meta Engineering</span><span>Feb 2026</span>
+                <span class="res-tag">Testing</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://research.google/blog/ai-in-software-engineering-at-google-progress-and-the-path-ahead/" target="_blank">
+            <div>
+              <div class="res-title">AI in Software Engineering at Google: Progress and the Path Ahead</div>
+              <div class="res-meta">
+                <span>Google Research</span><span>2025</span>
+                <span class="res-tag">Scale</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/" target="_blank">
+            <div>
+              <div class="res-title">AlphaEvolve: A Gemini-Powered Coding Agent for Advanced Algorithms</div>
+              <div class="res-meta">
+                <span>Google DeepMind</span><span>May 2025</span>
+                <span class="res-tag">Evolutionary AI</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://aws.amazon.com/blogs/enterprise-strategy/your-ai-coding-assistants-will-overwhelm-your-delivery-pipeline-heres-how-to-prepare/" target="_blank">
+            <div>
+              <div class="res-title">Your AI Coding Assistants Will Overwhelm Your Delivery Pipeline</div>
+              <div class="res-meta">
+                <span>AWS Enterprise Strategy</span><span>2025</span>
+                <span class="res-tag">Warning</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic" target="_blank">
+            <div>
+              <div class="res-title">How AI is Transforming Work at Anthropic</div>
+              <div class="res-meta">
+                <span>Anthropic Research</span><span>Dec 2025</span>
+                <span class="res-tag">Internal Study</span>
+              </div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="resource-category" id="cat-papers">
+        <h3>Papers &amp; Research</h3>
+        <div class="resource-list">
+
+          <a class="resource-item" href="https://arxiv.org/abs/2506.13131" target="_blank">
+            <div>
+              <div class="res-title">AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery</div>
+              <div class="res-meta"><span>arXiv</span><span>2025</span><span class="res-tag">DeepMind</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://arxiv.org/abs/2501.12862" target="_blank">
+            <div>
+              <div class="res-title">Mutation-Guided LLM-based Test Generation at Meta</div>
+              <div class="res-meta"><span>arXiv</span><span>Jan 2025</span><span class="res-tag">Meta / Testing</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://research.google/blog/large-sequence-models-for-software-development-activities/" target="_blank">
+            <div>
+              <div class="res-title">Large Sequence Models for Software Development Activities (DIDACT)</div>
+              <div class="res-meta"><span>Google Research</span><span>2023</span><span class="res-tag">Foundation Model</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://huggingface.co/papers/2305.12050" target="_blank">
+            <div>
+              <div class="res-title">CodeCompose: Large-Scale Industrial Deployment of AI-assisted Code Authoring</div>
+              <div class="res-meta"><span>Meta</span><span>2023</span><span class="res-tag">Deployment</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://projectzero.google/2024/10/from-naptime-to-big-sleep.html" target="_blank">
+            <div>
+              <div class="res-title">From Naptime to Big Sleep: LLMs to Catch Vulnerabilities in Real-World Code</div>
+              <div class="res-meta"><span>Google Project Zero</span><span>Oct 2024</span><span class="res-tag">Security</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.businesswire.com/news/home/20251217666881/en/CodeRabbits-State-of-AI-vs-Human-Code-Generation-Report-Finds-That-AI-Written-Code-Produces-1.7x-More-Issues-Than-Human-Code" target="_blank">
+            <div>
+              <div class="res-title">State of AI vs Human Code Generation: AI Code Produces 1.7x More Issues</div>
+              <div class="res-meta"><span>CodeRabbit</span><span>Dec 2025</span><span class="res-tag">Quality Data</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="resource-category" id="cat-talks">
+        <h3>Talks &amp; Podcasts</h3>
+        <div class="resource-list">
+
+          <a class="resource-item" href="https://www.infoq.com/podcasts/platform-engineering-scaling-agents/" target="_blank">
+            <div>
+              <div class="res-title">Platform Engineering for AI: Scaling Agents and MCP at LinkedIn</div>
+              <div class="res-meta"><span>InfoQ Podcast</span><span>2026</span><span class="res-tag">LinkedIn</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://newsletter.pragmaticengineer.com/p/how-uber-uses-ai-for-development" target="_blank">
+            <div>
+              <div class="res-title">How Uber Uses AI for Development: Inside Look</div>
+              <div class="res-meta"><span>Pragmatic Engineer</span><span>2026</span><span class="res-tag">Uber</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://newsletter.pragmaticengineer.com/p/how-codex-is-built" target="_blank">
+            <div>
+              <div class="res-title">How Codex is Built</div>
+              <div class="res-meta"><span>Pragmatic Engineer</span><span>2026</span><span class="res-tag">OpenAI</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built" target="_blank">
+            <div>
+              <div class="res-title">How Claude Code is Built</div>
+              <div class="res-meta"><span>Pragmatic Engineer</span><span>2026</span><span class="res-tag">Anthropic</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://newsletter.pragmaticengineer.com/p/how-ai-is-changing-software-engineering" target="_blank">
+            <div>
+              <div class="res-title">How AI is Changing Software Engineering at Shopify with Farhan Thawar</div>
+              <div class="res-meta"><span>Pragmatic Engineer</span><span>2025</span><span class="res-tag">Shopify</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="resource-category" id="cat-tools">
+        <h3>Tools &amp; Repos</h3>
+        <div class="resource-list">
+
+          <a class="resource-item" href="https://shopify.engineering/introducing-roast" target="_blank">
+            <div>
+              <div class="res-title">Roast &mdash; Structured AI Workflow Framework (Ruby)</div>
+              <div class="res-meta"><span>Shopify</span><span class="res-tag">Open Source</span><span class="res-tag">Workflow DSL</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://agents.md/" target="_blank">
+            <div>
+              <div class="res-title">AGENTS.md &mdash; The Standard for Agent Context Files</div>
+              <div class="res-meta"><span>Community</span><span class="res-tag">Standard</span><span class="res-tag">Context Eng</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk" target="_blank">
+            <div>
+              <div class="res-title">Claude Agent SDK &mdash; Build Agents with Multi-turn Tool Use</div>
+              <div class="res-meta"><span>Anthropic</span><span class="res-tag">SDK</span><span class="res-tag">Python</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://blog.langchain.com/improving-deep-agents-with-harness-engineering/" target="_blank">
+            <div>
+              <div class="res-title">LangGraph &mdash; Improving Deep Agents with Harness Engineering</div>
+              <div class="res-meta"><span>LangChain</span><span class="res-tag">Framework</span><span class="res-tag">Python</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://blog.google/technology/google-labs/jules-now-available/" target="_blank">
+            <div>
+              <div class="res-title">Jules &mdash; Google's Async AI Coding Agent (Public Beta)</div>
+              <div class="res-meta"><span>Google</span><span class="res-tag">Product</span><span class="res-tag">Cloud VM</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://aws.amazon.com/blogs/devops/accelerate-application-upgrades-with-amazon-q-developer-agent-for-code-transformation/" target="_blank">
+            <div>
+              <div class="res-title">Amazon Q Developer Agent for Code Transformation</div>
+              <div class="res-meta"><span>AWS</span><span class="res-tag">Product</span><span class="res-tag">Migrations</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://openai.com/index/gpt-5-1-codex-max/" target="_blank">
+            <div>
+              <div class="res-title">GPT-5.1-Codex-Max &mdash; Building More with Agentic Coding</div>
+              <div class="res-meta"><span>OpenAI</span><span class="res-tag">Model</span><span class="res-tag">Agentic</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://code.claude.com/docs/en/overview" target="_blank">
+            <div>
+              <div class="res-title">Claude Code Docs &mdash; CLI Agent Documentation</div>
+              <div class="res-meta"><span>Anthropic</span><span class="res-tag">Docs</span><span class="res-tag">CLI</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="resource-category" id="cat-guides">
+        <h3>Guides &amp; Tutorials</h3>
+        <div class="resource-list">
+
+          <a class="resource-item" href="https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html" target="_blank">
+            <div>
+              <div class="res-title">Harness Engineering &mdash; Martin Fowler's Analysis</div>
+              <div class="res-meta"><span>Martin Fowler</span><span>2026</span><span class="res-tag">Analysis</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://dev.to/epappas/the-agent-harness-is-the-architecture-and-your-model-is-not-the-bottleneck-3bjd" target="_blank">
+            <div>
+              <div class="res-title">The Agent Harness is the Architecture (and Your Model is Not the Bottleneck)</div>
+              <div class="res-meta"><span>DEV Community</span><span>2026</span><span class="res-tag">Concepts</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.nxcode.io/resources/news/harness-engineering-complete-guide-ai-agent-codex-2026" target="_blank">
+            <div>
+              <div class="res-title">Harness Engineering: The Complete Guide (2026)</div>
+              <div class="res-meta"><span>NxCode</span><span>2026</span><span class="res-tag">Guide</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.ignorance.ai/p/the-emerging-harness-engineering" target="_blank">
+            <div>
+              <div class="res-title">The Emerging &ldquo;Harness Engineering&rdquo; Playbook</div>
+              <div class="res-meta"><span>Artificial Ignorance</span><span>2026</span><span class="res-tag">Playbook</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://www.anup.io/stripes-coding-agents-the-walls-matter-more-than-the-model/" target="_blank">
+            <div>
+              <div class="res-title">Stripe's Coding Agents: The Walls Matter More Than the Model</div>
+              <div class="res-meta"><span>Anup Jadhav</span><span>2026</span><span class="res-tag">Analysis</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+          <a class="resource-item" href="https://towardsagenticai.com/agentic-engineering-roadmap-skills-tools-resources-2026/" target="_blank">
+            <div>
+              <div class="res-title">Agentic Engineering Roadmap: Skills, Tools &amp; Resources 2026</div>
+              <div class="res-meta"><span>Towards Agentic AI</span><span>2026</span><span class="res-tag">Roadmap</span></div>
+            </div>
+            <span class="res-arrow">&rarr;</span>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="frameworks">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Agent <em>frameworks</em></h2>
+  </div>
+  <div class="frameworks-grid">
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <div class="fw-name">Roast</div>
+        <span class="fw-badge oss">Open Source</span>
+      </div>
+      <div class="fw-org">Shopify &middot; Ruby</div>
+      <div class="fw-desc">YAML+Markdown-configured workflows interleaving deterministic and agentic nodes. Used internally at Shopify for automated test grading and code quality tasks. The only major harness built in Ruby.</div>
+      <div class="fw-features">
+        <div class="fw-feature">YAML + Markdown config (no code required)</div>
+        <div class="fw-feature">Deterministic &harr; Agentic node alternation</div>
+        <div class="fw-feature">Built-in tool orchestration</div>
+        <div class="fw-feature">Production-tested at Shopify scale</div>
+      </div>
+      <a class="fw-link" href="https://shopify.engineering/introducing-roast" target="_blank">Read the announcement &rarr;</a>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <div class="fw-name">LangGraph</div>
+        <span class="fw-badge oss">Open Source</span>
+      </div>
+      <div class="fw-org">LangChain &middot; Python / JavaScript</div>
+      <div class="fw-desc">Graph-based agent orchestration framework. LangChain published research showing that harness improvements alone (same model) drove a 13.7-point gain on TerminalBench &mdash; the strongest evidence that the harness is the moat.</div>
+      <div class="fw-features">
+        <div class="fw-feature">Stateful, graph-based agent flows</div>
+        <div class="fw-feature">Human-in-the-loop checkpoints</div>
+        <div class="fw-feature">Persistent memory across turns</div>
+        <div class="fw-feature">Used by Uber's LangEffect wrapper</div>
+      </div>
+      <a class="fw-link" href="https://blog.langchain.com/improving-deep-agents-with-harness-engineering/" target="_blank">Harness improvements study &rarr;</a>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <div class="fw-name">Goose</div>
+        <span class="fw-badge oss">Open Source</span>
+      </div>
+      <div class="fw-org">Block (Square) &middot; Python</div>
+      <div class="fw-desc">Open-source coding agent that Stripe forked and heavily modified to build Minions. If you want to understand Stripe's architecture from first principles, Goose is the starting point.</div>
+      <div class="fw-features">
+        <div class="fw-feature">Extensible tool system</div>
+        <div class="fw-feature">MCP server integration</div>
+        <div class="fw-feature">Foundation of Stripe's Minions</div>
+        <div class="fw-feature">Active Block/Square maintenance</div>
+      </div>
+      <a class="fw-link" href="https://github.com/block/goose" target="_blank">GitHub repo &rarr;</a>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <div class="fw-name">Claude Code</div>
+        <span class="fw-badge product">Product</span>
+      </div>
+      <div class="fw-org">Anthropic &middot; TypeScript (CLI)</div>
+      <div class="fw-desc">Minimal CLI agent using React/Ink, distributed via npm with no containerization. 90% of its own code was AI-generated. Published harness SDK for building multi-agent pipelines on top of it.</div>
+      <div class="fw-features">
+        <div class="fw-feature">Lightweight: no Docker, no cloud required</div>
+        <div class="fw-feature">CLAUDE.md context files</div>
+        <div class="fw-feature">Agent SDK for multi-agent composition</div>
+        <div class="fw-feature">60&ndash;100 internal releases per day at Anthropic</div>
+      </div>
+      <a class="fw-link" href="https://code.claude.com/docs/en/overview" target="_blank">Documentation &rarr;</a>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <div class="fw-name">Confucius SDK</div>
+        <span class="fw-badge oss">Open Source</span>
+      </div>
+      <div class="fw-org">Meta &middot; Python</div>
+      <div class="fw-desc">Hierarchical working memory, persistent cross-session learning, and a meta-agent that automatically builds and refines other agents through evaluation-driven build-test-improve loops.</div>
+      <div class="fw-features">
+        <div class="fw-feature">Meta-agent for automatic agent construction</div>
+        <div class="fw-feature">Hierarchical + persistent memory</div>
+        <div class="fw-feature">74.6% SWE-Bench-Verified</div>
+        <div class="fw-feature">Evaluation-driven improvement loops</div>
+      </div>
+      <a class="fw-link" href="https://engineering.fb.com" target="_blank">Meta Engineering &rarr;</a>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <div class="fw-name">Amazon Q / Kiro</div>
+        <span class="fw-badge product">Product</span>
+      </div>
+      <div class="fw-org">Amazon Web Services &middot; Cloud</div>
+      <div class="fw-desc">Spec-driven agentic IDE. Q Developer has production deployments: 30,000 Java app upgrades, 4,500 developer-years saved. Kiro is the next-gen virtual developer with persistent project context.</div>
+      <div class="fw-features">
+        <div class="fw-feature">Spec-first development workflow</div>
+        <div class="fw-feature">Persistent context across sessions</div>
+        <div class="fw-feature">Code transformation agents for migrations</div>
+        <div class="fw-feature">10 parallel instances per engineer</div>
+      </div>
+      <a class="fw-link" href="https://aws.amazon.com/q/developer/" target="_blank">Amazon Q Developer &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="patterns">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Core <em>patterns</em></h2>
+  </div>
+  <div class="patterns-section">
+    <p style="color: var(--text-muted); max-width: 640px; font-size: 15px; line-height: 1.7;">
+      These patterns have converged independently across every major engineering organization deploying agents at scale. They represent robust solutions, not company-specific quirks.
+    </p>
+
+    <div class="patterns-grid">
+      <div class="pattern-card">
+        <div class="pattern-num">01</div>
+        <div class="pattern-name">Deterministic&ndash;Agentic Hybrid</div>
+        <div class="pattern-desc">Alternate fixed logic nodes (linting, CI, git) with LLM nodes (generation, interpretation). The model does not run the system &mdash; the system runs the model.</div>
+        <div class="pattern-example">Seen in: Stripe Blueprints, Uber Validator, Meta Confucius</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">02</div>
+        <div class="pattern-name">Isolated Execution Environments</div>
+        <div class="pattern-desc">Agents run in sandboxes identical to human developer machines &mdash; devboxes, VMs, containers. Isolation is the permission system. No complex auth needed.</div>
+        <div class="pattern-example">Seen in: Stripe devboxes, Google Cloud VMs (Jules), Anthropic local exec</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">03</div>
+        <div class="pattern-name">Context Engineering (not prompt engineering)</div>
+        <div class="pattern-desc">Curated, structured, contextually relevant information delivered per task. AGENTS.md files, directory-scoped rules, semantic indexes. Over-contextualization is as harmful as under-.</div>
+        <div class="pattern-example">Seen in: OpenAI AGENTS.md, Stripe Toolshed, Uber MCP Gateway</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">04</div>
+        <div class="pattern-name">Tiered Review Gates</div>
+        <div class="pattern-desc">Risk-classified review: documentation gets AI-only review; billing logic, security, and data migrations demand full human scrutiny. Cap CI retries at 2&ndash;3 rounds.</div>
+        <div class="pattern-example">Seen in: OpenAI (10-level tiers), Stripe (2 CI rounds max), Amazon (senior sign-off)</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">05</div>
+        <div class="pattern-name">Background / Async Agent Workflows</div>
+        <div class="pattern-desc">The biggest productivity gains come from fire-and-forget background agents, not interactive copilots. Engineers launch 10&ndash;20 parallel tasks and review output, not generate it.</div>
+        <div class="pattern-example">Seen in: Stripe Minions, Uber background agents, OpenAI parallel Codex threads</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">06</div>
+        <div class="pattern-name">Failure as Infrastructure Signal</div>
+        <div class="pattern-desc">When an agent struggles, the fix is never &ldquo;try harder.&rdquo; Identify what capability or constraint is missing and feed it back into the repository as permanent infrastructure.</div>
+        <div class="pattern-example">Seen in: OpenAI's core principle, Stripe's rule files, Anthropic's two-agent architecture</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contribute">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">How to <em>contribute</em></h2>
+  </div>
+  <div class="contribute-section">
+    <div class="contribute-left">
+      <h2>Add a resource,<br><em>open a PR.</em></h2>
+      <p>This list is maintained by the community. If you've found an engineering blog, paper, framework, or case study that belongs here, contributions are welcome. The bar is: published by an engineering org (not a vendor), describes a real production deployment, and includes at least one concrete metric or architectural detail.</p>
+
+      <div class="contribute-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h4>Fork the repo</h4>
+            <p>Clone and create a branch named <code style="font-family: var(--mono); font-size: 11px; background: var(--surface2); padding: 2px 6px;">add/your-resource-name</code></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h4>Add to README.md</h4>
+            <p>Follow the format below. Include company, year, category tag, and a one-line description with at least one metric.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h4>Open a pull request</h4>
+            <p>Use the PR template. A maintainer will review within 48 hours. Automated link-checking runs on every PR.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h4>Or use GitHub Issues</h4>
+            <p>Can't write a PR? Open an issue with the <code style="font-family: var(--mono); font-size: 11px; background: var(--surface2); padding: 2px 6px;">resource-submission</code> label and paste the link + description.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contribute-right">
+      <h3>README entry format</h3>
+      <div class="template-box"><span class="comment">## Entry format for README.md</span>
+
+<span class="key">- **[Title of Resource]**</span> &mdash; [company]
+  <span class="val">Brief description. Must include one concrete</span>
+  <span class="val">metric or architectural detail. (~2 sentences)</span>
+  `[YYYY]` `[category-tag]`
+  Link: URL
+
+<span class="comment">## Example:</span>
+
+<span class="key">- **Harness Engineering: Leveraging Codex in
+  an Agent-First World**</span> &mdash; OpenAI
+  <span class="val">How OpenAI built 1M+ lines of code with zero
+  manually-written code using Codex + AGENTS.md
+  harness. Engineers open 70% more PRs.</span>
+  `[2026]` `[harness]` `[context-engineering]`
+  Link: openai.com/index/harness-engineering</div>
+
+      <h3 style="margin-top: 24px;">Accepted categories</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;">
+        <span class="res-tag">harness</span>
+        <span class="res-tag">context-engineering</span>
+        <span class="res-tag">multi-agent</span>
+        <span class="res-tag">code-review</span>
+        <span class="res-tag">testing</span>
+        <span class="res-tag">migrations</span>
+        <span class="res-tag">framework</span>
+        <span class="res-tag">security</span>
+        <span class="res-tag">orgs</span>
+        <span class="res-tag">metrics</span>
+        <span class="res-tag">lessons-learned</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">
+    awesome-agentic-engineering &middot; maintained by the community &middot; CC0 license
+  </div>
+  <div class="footer-right">
+    <a href="https://github.com/Parvej2017/awesome-agentic-engineering" target="_blank">GitHub</a>
+    <a href="https://github.com/Parvej2017/awesome-agentic-engineering/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a>
+    <a href="https://github.com/Parvej2017/awesome-agentic-engineering/issues/new?template=resource-submission.md" target="_blank">Submit Resource</a>
+  </div>
+</footer>
+
+<script>
+  function showCategory(cat) {
+    document.querySelectorAll('.res-nav-item').forEach(function(el) { el.classList.remove('active'); });
+    event.currentTarget.classList.add('active');
+
+    document.querySelectorAll('.resource-category').forEach(function(el) { el.classList.remove('active'); });
+    document.getElementById('cat-' + cat).classList.add('active');
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.company-card, .pattern-card, .framework-card').forEach(function(card) {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(16px)';
+    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(card);
+  });
+</script>
+
+</body>
+</html>
