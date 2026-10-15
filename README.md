@@ -201,6 +201,7 @@ When an agent struggles, the fix is never "try harder." Identify what capability
 | [Claude Code](https://code.claude.com/docs/en/overview) | Anthropic | TypeScript | Product | CLI agent, Agent SDK for multi-agent composition, CLAUDE.md context |
 | [Confucius SDK](https://engineering.fb.com) | Meta | Python | OSS | Meta-agent that builds other agents; 74.6% SWE-Bench-Verified |
 | [Amazon Q / Kiro](https://aws.amazon.com/q/developer/) | AWS | Cloud | Product | Spec-driven development, persistent context, 10 parallel instances |
+| [MySpec](https://myspec.dev?utm_source=github&utm_medium=referral&utm_campaign=gh-parvejhosen-awesome-agentic-engineering) | MySpec | TypeScript/MCP | Product | Spec-driven development workbench, contract-first harness, MCP server |
 
 ---
 
@@ -254,6 +255,7 @@ When an agent struggles, the fix is never "try harder." Identify what capability
 - [Jules](https://blog.google/technology/google-labs/jules-now-available/) — Google's async AI coding agent running in Cloud VMs `[Product]`
 - [Amazon Q Developer](https://aws.amazon.com/blogs/devops/accelerate-application-upgrades-with-amazon-q-developer-agent-for-code-transformation/) — Code transformation agents for large-scale migrations `[Product]`
 - [Claude Code Docs](https://code.claude.com/docs/en/overview) — CLI agent documentation `[Docs]`
+- [MySpec](https://myspec.dev?utm_source=github&utm_medium=referral&utm_campaign=gh-parvejhosen-awesome-agentic-engineering): Spec-driven development workbench and MCP server for grounding agent context with architectural contracts [Product]
 
 ---
 
